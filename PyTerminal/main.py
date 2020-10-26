@@ -87,7 +87,7 @@ def helpMenu(args):
 			if line.lower().startswith("def"):
 				functions.append(line.split("def ")[1].split("(")[0])
 		return functions
-	
+
 	print("Defined functions in", args)
 
 	parsedFunctions = None
@@ -95,7 +95,10 @@ def helpMenu(args):
 		parsedFunctions = parseFile(args + ".py")
 	if os.path.exists("plugins/" + args + ".py"):
 		parsedFunctions = parseFile("plugins/" + args + ".py")
-	if not parsedFunctions:
+	
+	if args.lower() == "help":
+		parsedFunctions = parseFile("main.py")
+	elif not parsedFunctions:
 		print("No plugin or main function called:", args)
 		return
 	
